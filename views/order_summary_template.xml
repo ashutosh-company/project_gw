@@ -1,0 +1,61 @@
+<odoo>
+    <record id="view_order_summary_form" model="ir.ui.view">
+        <field name="name">order.summary.form</field>
+        <field name="model">order.summary</field>
+        <field name="arch" type="xml">
+            <form string="Order Summary">
+                <sheet>
+                    <group>
+                        <field name="domain" widget="domain" options="{'model': 'stock.move'}"/>
+                        <button type="object"
+                                name="action_show_filtered_stock_moves"
+                                string="Show Filtered Stock Moves"
+                                class="btn-primary"/>
+                    </group>
+                    <footer>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!-- Popup form -->
+    <record id="order_summary_popup_form" model="ir.ui.view">
+        <field name="name">order.summary.popup.form</field>
+        <field name="model">order.summary</field>
+        <field name="arch" type="xml">
+            <form string="Stock Moves">
+                <sheet>
+                    <div id="stock_moves_container"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <menuitem id="menu_order_summary_root"
+              name="Order Summary"
+              sequence="10"
+              parent="stock.menu_stock_root" /> <!-- or another parent like 'base.menu_custom' -->
+
+    <!-- Action Window -->
+    <record id="action_order_summary" model="ir.actions.act_window">
+        <field name="name">Order Summary</field>
+        <field name="res_model">order.summary</field>
+        <field name="view_mode">form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create an Order Summary
+            </p>
+        </field>
+    </record>
+
+    <!-- Child Menu -->
+    <menuitem id="menu_order_summary"
+              name="Order Summaries"
+              parent="menu_order_summary_root"
+              action="action_order_summary"
+              sequence="20"/>
+</odoo>
+

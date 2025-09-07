@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates id="template" xml:space="preserve">
+    <t t-name="project_gw.StockMovePopup">
+        <div class="o_form_view">
+            <h3>Stock Moves (From API)</h3>
+            <table class="o_list_view table table-sm">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Product</th>
+                        <th>State</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="state.stockMoves" t-as="move" t-key="move.id">
+                        <tr>
+                            <td><t t-esc="move.id"/></td>
+                            <td><t t-esc="move.name"/></td>
+                            <td><t t-esc="move.product"/></td>
+                            <td><t t-esc="move.state"/></td>
+                        </tr>
+                    </t>
+                </tbody>
+
+                <div class="d-flex justify-content-between align-items-center mt-3">
+                    <button t-on-click="prevPage" class="btn btn-secondary">⬅ Prev</button>
+                    <span>
+                        Page <t t-esc="Math.floor(state.offset / state.limit) + 1"/> /
+                        <t t-esc="Math.ceil(state.total / state.limit)"/>
+                    </span>
+                    <button t-on-click="nextPage" class="btn btn-secondary">Next ➡</button>
+                </div>
+            </table>
+        </div>
+    </t>
+</templates>
